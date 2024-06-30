@@ -4,16 +4,15 @@ import { Suspense } from "react";
 
 function App() {
   return (
-    // <BrowserRouter>
-    // {/* <Suspense fallback={<div></div>}> */}
-		// 	<Routes>
-		// 		<Route path="/" element={<Chat />} />
-		// 		<Route path="/chat" element={<Chat />} />
-		// 		{/* <Route path="*" element={<Error />} /> */}
-		// 	</Routes>
-		// {/* </Suspense> */}
-    // </BrowserRouter>
-    <Chat />
+    <BrowserRouter>
+    {/* <Suspense fallback={<div></div>}> */}
+			<Routes>
+				{/* <Route path="/" element={<Chat />} /> */}
+				<Route path="/chat" element={<Chat />} />
+				{/* <Route path="*" element={<Error />} /> */}
+			</Routes>
+		{/* </Suspense> */}
+    </BrowserRouter>
   );
 }
 
