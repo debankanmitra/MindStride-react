@@ -5,15 +5,17 @@ function Prompt_Template() {
 			<div className="py-10 lg:py-14">
 				{/* <!-- Title --> */}
 				<div className="max-w-4xl px-4 sm:px-6 lg:px-8 mx-auto text-center">
-					<h1 className="text-3xl font-bold text-gray-800 sm:text-4xl dark:text-white">
-						Welcome to Preline AI
-					</h1>
+					<div className="flex items-center justify-center gap-x-2 ">
+						<h1 className="text-3xl font-bold text-gray-800 sm:text-4xl dark:text-white">
+							Welcome to Mindstride AI
+						</h1>
+						<div className="relative w-8 h-8 bg-gradient-to-r from-blue-500 via-blue-700 to-indigo-800 rounded-full bg-[length:200%_200%] animate-gradient-x"></div>
+					</div>
 					<p className="mt-3 text-gray-600 dark:text-neutral-400">
-						Your AI-powered copilot for the web
+						Your AI-powered copilot for personal growth and self-improvement.
 					</p>
 				</div>
 				{/* <!-- End Title --> */}
-
 				<ul className="mt-16 space-y-5">
 					{/* <!-- Chat Bubble --> */}
 					<li className="max-w-4xl py-2 px-4 sm:px-6 lg:px-8 mx-auto flex gap-x-2 sm:gap-x-4">
@@ -640,7 +642,7 @@ function Prompt_Template() {
 																>
 																	<div
 																		className="flex flex-col justify-center overflow-hidden bg-gray-800 text-xs text-white text-center whitespace-nowrap dark:bg-neutral-200"
-																		style={{ width: '25%' }}
+																		style={{ width: "25%" }}
 																	></div>
 																</div>
 															</div>
@@ -707,7 +709,7 @@ function Prompt_Template() {
 																>
 																	<div
 																		className="flex flex-col justify-center overflow-hidden bg-gray-800 text-xs text-white text-center whitespace-nowrap dark:bg-neutral-200"
-																		style={{ width: '78%' }}
+																		style={{ width: "78%" }}
 																	></div>
 																</div>
 															</div>
@@ -774,7 +776,7 @@ function Prompt_Template() {
 																>
 																	<div
 																		className="flex flex-col justify-center overflow-hidden bg-gray-800 text-xs text-white text-center whitespace-nowrap dark:bg-neutral-200"
-																		style={{ width: '100%' }}
+																		style={{ width: "100%" }}
 																	></div>
 																</div>
 															</div>
@@ -841,7 +843,7 @@ function Prompt_Template() {
 																>
 																	<div
 																		className="flex flex-col justify-center overflow-hidden bg-gray-800 text-xs text-white text-center whitespace-nowrap dark:bg-neutral-200"
-																		style={{ width: '1%' }}
+																		style={{ width: "1%" }}
 																	></div>
 																</div>
 															</div>
@@ -1931,112 +1933,32 @@ function Prompt_Template() {
 				</div>
 
 				{/* <!-- Input --> */}
-				<div className="relative">
-					<textarea
-						className="p-4 pb-12 block w-full bg-gray-100 border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-						placeholder="Ask me anything..."
-					></textarea>
-
-					{/* <!-- Toolbar --> */}
-					<div className="absolute bottom-px inset-x-px p-2 rounded-b-lg bg-gray-100 dark:bg-neutral-800">
-						<div className="flex justify-between items-center">
-							{/* <!-- Button Group --> */}
-							<div className="flex items-center">
-								{/* <!-- Mic Button --> */}
-								<button
-									type="button"
-									className="inline-flex flex-shrink-0 justify-center items-center size-8 rounded-lg text-gray-500 hover:text-blue-600 focus:z-10 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-neutral-500 dark:hover:text-blue-500"
-								>
-									<svg
-										className="flex-shrink-0 size-4"
-										xmlns="http://www.w3.org/2000/svg"
-										width="24"
-										height="24"
-										viewBox="0 0 24 24"
-										fill="none"
-										stroke="currentColor"
-										strokeWidth="2"
-										strokeLinecap="round"
-										strokeLinejoin="round"
-									>
-										<rect width="18" height="18" x="3" y="3" rx="2" />
-										<line x1="9" x2="15" y1="15" y2="9" />
-									</svg>
-								</button>
-								{/* <!-- End Mic Button --> */}
-
-								{/* <!-- Attach Button --> */}
-								<button
-									type="button"
-									className="inline-flex flex-shrink-0 justify-center items-center size-8 rounded-lg text-gray-500 hover:text-blue-600 focus:z-10 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-neutral-500 dark:hover:text-blue-500"
-								>
-									<svg
-										className="flex-shrink-0 size-4"
-										xmlns="http://www.w3.org/2000/svg"
-										width="24"
-										height="24"
-										viewBox="0 0 24 24"
-										fill="none"
-										stroke="currentColor"
-										strokeWidth="2"
-										strokeLinecap="round"
-										strokeLinejoin="round"
-									>
-										<path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48" />
-									</svg>
-								</button>
-								{/* <!-- End Attach Button --> */}
-							</div>
-							{/* <!-- End Button Group --> */}
-
-							{/* <!-- Button Group --> */}
-							<div className="flex items-center gap-x-1">
-								{/* <!-- Mic Button --> */}
-								<button
-									type="button"
-									className="inline-flex flex-shrink-0 justify-center items-center size-8 rounded-lg text-gray-500 hover:text-blue-600 focus:z-10 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-neutral-500 dark:hover:text-blue-500"
-								>
-									<svg
-										className="flex-shrink-0 size-4"
-										xmlns="http://www.w3.org/2000/svg"
-										width="24"
-										height="24"
-										viewBox="0 0 24 24"
-										fill="none"
-										stroke="currentColor"
-										strokeWidth="2"
-										strokeLinecap="round"
-										strokeLinejoin="round"
-									>
-										<path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" />
-										<path d="M19 10v2a7 7 0 0 1-14 0v-2" />
-										<line x1="12" x2="12" y1="19" y2="22" />
-									</svg>
-								</button>
-								{/* <!-- End Mic Button --> */}
-
-								{/* <!-- Send Button --> */}
-								<button
-									type="button"
-									className="inline-flex flex-shrink-0 justify-center items-center size-8 rounded-lg text-white bg-blue-600 hover:bg-blue-500 focus:z-10 focus:outline-none focus:ring-2 focus:ring-blue-500"
-								>
-									<svg
-										className="flex-shrink-0 size-3.5"
-										xmlns="http://www.w3.org/2000/svg"
-										width="16"
-										height="16"
-										fill="currentColor"
-										viewBox="0 0 16 16"
-									>
-										<path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083l6-15Zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471-.47 1.178Z" />
-									</svg>
-								</button>
-								{/* <!-- End Send Button --> */}
-							</div>
-							{/* <!-- End Button Group --> */}
-						</div>
-					</div>
-					{/* <!-- End Toolbar --> */}
+				<div className="relative w-full">
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						viewBox="0 0 16 16"
+						aria-hidden="true"
+						className="absolute left-3 top-1/2 size-4 -translate-y-1/2 fill-blue-700 dark:fill-blue-600"
+					>
+						<path
+							fillRule="evenodd"
+							d="M5 4a.75.75 0 0 1 .738.616l.252 1.388A1.25 1.25 0 0 0 6.996 7.01l1.388.252a.75.75 0 0 1 0 1.476l-1.388.252A1.25 1.25 0 0 0 5.99 9.996l-.252 1.388a.75.75 0 0 1-1.476 0L4.01 9.996A1.25 1.25 0 0 0 3.004 8.99l-1.388-.252a.75.75 0 0 1 0-1.476l1.388-.252A1.25 1.25 0 0 0 4.01 6.004l.252-1.388A.75.75 0 0 1 5 4ZM12 1a.75.75 0 0 1 .721.544l.195.682c.118.415.443.74.858.858l.682.195a.75.75 0 0 1 0 1.442l-.682.195a1.25 1.25 0 0 0-.858.858l-.195.682a.75.75 0 0 1-1.442 0l-.195-.682a1.25 1.25 0 0 0-.858-.858l-.682-.195a.75.75 0 0 1 0-1.442l.682-.195a1.25 1.25 0 0 0 .858-.858l.195-.682A.75.75 0 0 1 12 1ZM10 11a.75.75 0 0 1 .728.568.968.968 0 0 0 .704.704.75.75 0 0 1 0 1.456.968.968 0 0 0-.704.704.75.75 0 0 1-1.456 0 .968.968 0 0 0-.704-.704.75.75 0 0 1 0-1.456.968.968 0 0 0 .704-.704A.75.75 0 0 1 10 11Z"
+							clipRule="evenodd"
+						/>
+					</svg>
+					<input
+						id="aiPromt"
+						type="text"
+						className="w-full border border-gray-300 focus:outline-none focus:border-gray-500 px-2 py-4 pl-10 pr-24 rounded-xl text-sm dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500"
+						name="prompt"
+						placeholder="Ask me anything ..."
+					/>
+					<button
+						type="button"
+						className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer bg-blue-700 rounded-xl px-2 py-1 text-xs tracking-wide text-slate-100 transition hover:opacity-75 active:opacity-100 active:outline-offset-0 dark:bg-blue-600 dark:text-slate-100"
+					>
+						Generate
+					</button>
 				</div>
 				{/* <!-- End Input --> */}
 			</footer>
