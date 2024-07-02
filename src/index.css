@@ -10,3 +10,29 @@ body {
 html {
   scroll-behavior: smooth;
 }
+
+
+.gallery  {
+  --d: 6s; /* duration */
+  
+  display: grid;
+  overflow: hidden;
+  -webkit-mask: linear-gradient(90deg,#0000,#000 10% 90%,#0000);
+  mask: radial-gradient(90deg,#0000,#000 10% 90%,#0000);
+}
+.gallery > img {
+  grid-area: 1/1;
+  /* height: 100%;
+  aspect-ratio: 1.5; */
+  /* object-fit: cover; */
+  animation: r var(--d) linear infinite;
+}
+.gallery > img:nth-child(2) {animation-delay: calc(1*var(--d)/-4)}
+.gallery > img:nth-child(3) {animation-delay: calc(2*var(--d)/-4)}
+.gallery > img:nth-child(4) {animation-delay: calc(3*var(--d)/-4)}
+
+@keyframes r {
+  75%    {transform: translate(-300%)}
+  75.01% {transform: translate( 100%)}
+}
+
