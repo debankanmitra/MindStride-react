@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Footer from "../components/Footer";
-import { Navigate } from "react-router-dom";
 function Landing() {
 	const [name, setName] = useState("");
 	const [isInvalid, setIsInvalid] = useState(false);
@@ -8,7 +7,7 @@ function Landing() {
 		e.preventDefault();
 		if (name.trim() != "") {
 			localStorage.setItem("name", name);
-			Navigate("/chat");
+			window.location.href = "/chat";
 		} else {
 			setIsInvalid(true);
 		}
