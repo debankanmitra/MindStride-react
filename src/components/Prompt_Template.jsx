@@ -8,12 +8,12 @@ function Prompt_Template() {
 				{/* <!-- Title --> */}
 				<div className="max-w-4xl px-4 sm:px-6 lg:px-8 mx-auto text-center">
 					<div className="flex items-center justify-center gap-x-2 ">
-						<h1 className="text-3xl font-bold text-gray-800 sm:text-4xl dark:text-white">
+						<h1 className="text-3xl font-bold text-gray-800 sm:text-4xl ">
 							Welcome to Mindstride AI
 						</h1>
-						<div className="relative w-8 h-8 bg-gradient-to-r from-blue-500 via-blue-700 to-indigo-800 rounded-full bg-[length:200%_200%] animate-gradient-x"></div>
+						<div className="relative w-8 h-8 bg-gradient-to-r from-blue-300 via-blue-500 to-indigo-900 rounded-full bg-[length:200%_200%] animate-gradient-x"></div>
 					</div>
-					<p className="mt-3 text-gray-600 dark:text-neutral-400">
+					<p className="mt-3 text-gray-600 ">
 						Your AI-powered copilot for personal growth and self-improvement.
 					</p>
 				</div>
@@ -29,7 +29,7 @@ function Prompt_Template() {
 					{/* <!-- Sidebar Toggle --> */}
 					<button
 						type="button"
-						className="p-2 inline-flex items-center gap-x-2 text-xs font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800"
+						className="p-2 inline-flex items-center gap-x-2 text-xs font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
 						data-hs-overlay="#application-sidebar"
 						aria-controls="application-sidebar"
 						aria-label="Toggle navigation"
@@ -61,7 +61,7 @@ function Prompt_Template() {
 						xmlns="http://www.w3.org/2000/svg"
 						viewBox="0 0 16 16"
 						aria-hidden="true"
-						className="absolute left-3 top-1/2 size-4 -translate-y-1/2 fill-blue-700 dark:fill-blue-600"
+						className="absolute left-3 top-1/2 size-4 -translate-y-1/2 fill-blue-700 "
 					>
 						<path
 							fillRule="evenodd"
@@ -72,15 +72,32 @@ function Prompt_Template() {
 					<input
 						id="aiPromt"
 						type="text"
-						className="w-full border border-gray-300 focus:outline-none focus:border-gray-500 px-2 py-4 pl-10 pr-24 rounded-xl text-sm dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500"
+						className="w-full border bg-gray-200 border-gray-200 focus:outline-none focus:border-blue-500 focus:ring-blue-500 px-2 py-4 pl-10 pr-24 rounded-xl text-sm"
 						name="prompt"
 						placeholder="Ask me anything ..."
 					/>
-					<button
-						type="button"
-						className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer bg-blue-700 rounded-xl px-2 py-1 text-xs tracking-wide text-slate-100 transition hover:opacity-75 active:opacity-100 active:outline-offset-0 dark:bg-blue-600 dark:text-slate-100"
-					>
-						Send
+					<button type="button">
+						<svg
+							className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer tracking-wide transition hover:opacity-75 active:opacity-100 active:outline-offset-0 "
+							fill="#2E86C1 "
+							height="25"
+							width="45"
+							version="1.1"
+							id="Layer_1"
+							xmlns="http://www.w3.org/2000/svg"
+							viewBox="0 0 512.003 512.003"
+							xmlSpace="preserve"
+						>
+							<g>
+								<g>
+									<path
+										d="M507.284,248.364L12.35,0.898C8.894-0.826,4.721-0.007,2.153,2.86c-2.56,2.884-2.867,7.125-0.759,10.351l159.07,242.79
+			L1.393,498.792c-2.108,3.226-1.801,7.467,0.759,10.351c1.664,1.86,4.002,2.859,6.383,2.859c1.289,0,2.594-0.29,3.814-0.896
+			l494.933-247.467c2.893-1.451,4.719-4.403,4.719-7.637S510.176,249.815,507.284,248.364z"
+									/>
+								</g>
+							</g>
+						</svg>
 					</button>
 				</div>
 				{/* <!-- End Input --> */}

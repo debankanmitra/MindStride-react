@@ -4,7 +4,7 @@
 @tailwind utilities;
 
 body {
-  @apply bg-neutral-900;
+  @apply bg-white;
 }
 
 html {
