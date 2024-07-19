@@ -1,4 +1,7 @@
 function Sidebar() {
+	const handleNewChat = () => {
+		window.location.reload();
+	}
 	return (
 		// <!-- Sidebar -->
 		<div
@@ -47,7 +50,9 @@ function Sidebar() {
 							fill="black"
 						/>
 					</svg>{" "}
-					<a href="/" className="text-black text-2xl font-extrabold">mindstride</a>
+					<a href="/" className="text-black text-2xl font-extrabold">
+						mindstride
+					</a>
 					{/* <!-- End Logo --> */}
 				</div>
 
@@ -55,10 +60,7 @@ function Sidebar() {
 					{/* <!-- List --> */}
 					<ul className="space-y-1.5 p-4">
 						<li>
-							<a
-								className="flex items-center gap-x-3 py-2 px-3 text-sm text-gray-700 rounded-lg hover:bg-gray-100 "
-								href="#"
-							>
+							<button className="flex items-center gap-x-3 py-2 px-3 text-sm text-gray-700 rounded-lg hover:bg-gray-100" onClick={handleNewChat}>
 								<svg
 									className="flex-shrink-0 size-4"
 									xmlns="http://www.w3.org/2000/svg"
@@ -75,7 +77,7 @@ function Sidebar() {
 									<path d="M12 5v14" />
 								</svg>
 								New chat
-							</a>
+							</button>
 						</li>
 					</ul>
 					{/* <!-- End List --> */}
@@ -174,7 +176,7 @@ function Sidebar() {
 
 					<div className="p-4 border-t border-gray-200">
 						<a
-							className="flex justify-between items-center gap-x-3 py-2 px-3 text-sm text-gray-700 rounded-lg hover:bg-gray-100 "
+							className="flex justify-between items-center gap-x-3 py-2 px-3 text-sm text-gray-700 rounded-lg hover:bg-gray-100 cursor-not-allowed"
 							href="#"
 						>
 							Sign in

@@ -7,6 +7,7 @@ function Landing() {
 		e.preventDefault();
 		if (name.trim() != "") {
 			localStorage.setItem("name", name);
+			localStorage.setItem("chat", 1);
 			window.location.href = "/chat";
 		} else {
 			setIsInvalid(true);

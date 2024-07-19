@@ -1,6 +1,58 @@
+import { useState, useEffect } from "react";
 import Chat_Bubble from "./Chat_Bubble";
+import axios from "axios";
 
 function Prompt_Template() {
+	const userName = localStorage.getItem("name") || "User"; // default user name
+	const [messages, setMessages] = useState([
+		{
+			sender: "user",
+			text: "What's Mindstride?",
+		},
+		{
+			sender: "bot",
+			text: `Hi ${userName}, Mindstride is a RAG-based chat assistant designed to support mental health, personal growth, and self-improvement. Ask me anything you want to know about mental health, personal growth, or self-improvement.`,
+		},
+	]);
+	const [input, setInput] = useState("");
+
+	const sendMessage = async () => {
+		if (input.trim() === "") return;
+
+		const userMessage = { sender: "user", text: input };
+		setMessages((prevMessages) => [...prevMessages, userMessage]);
+
+		setInput("");
+		try {
+			const response = await axios.post(
+				"https://z52r4jnvr2i3e4r4gegsdzh4vq0snwza.lambda-url.us-east-1.on.aws/gemini_inference",
+				{ user: input }
+			);
+
+			console.log(response);
+			const botMessage = { sender: "bot", text: response.data.output };
+			setMessages((prevMessages) => [...prevMessages, botMessage]);
+		} catch (error) {
+			console.error("Error sending message:", error);
+		}
+
+	};
+
+	const handleInputChange = (e) => {
+		setInput(e.target.value);
+	};
+
+	const handleKeyPress = (e) => {
+		if (e.key === "Enter") {
+			sendMessage();
+		}
+	};
+
+	// Log messages whenever they change
+	useEffect(() => {
+		console.log(messages);
+	}, [messages]);
+
 	return (
 		// <!-- Content -->
 		<div className="relative h-screen w-full lg:ps-64">
@@ -19,7 +71,14 @@ function Prompt_Template() {
 				</div>
 				{/* <!-- End Title --> */}
 				<ul className="mt-16 space-y-5">
-					<Chat_Bubble />
+					{messages.map((msg, index) => (
+						<Chat_Bubble
+							key={index}
+							user={msg.sender === "user" ? msg.text : undefined}
+							bot={msg.sender === "bot" ? msg.text : undefined}
+							// status={msg.status}
+						/>
+					))}
 				</ul>
 			</div>
 
@@ -74,9 +133,12 @@ function Prompt_Template() {
 						type="text"
 						className="w-full border bg-gray-200 border-gray-200 focus:outline-none focus:border-blue-500 focus:ring-blue-500 px-2 py-4 pl-10 pr-24 rounded-xl text-sm"
 						name="prompt"
+						value={input}
+						onChange={handleInputChange}
+						onKeyDown={handleKeyPress}
 						placeholder="Ask me anything ..."
 					/>
-					<button type="button">
+					<button type="button" onClick={sendMessage}>
 						<svg
 							className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer tracking-wide transition hover:opacity-75 active:opacity-100 active:outline-offset-0 "
 							fill="#2E86C1 "
