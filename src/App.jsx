@@ -27,6 +27,8 @@ const openDatabase = () => {
 			});
 			// Add any additional columns you need here
 			// objectStore.createIndex('column_name', 'column_name', { unique: false });
+
+			console.log("Table created successfully");
 		}
 	};
 

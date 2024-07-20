@@ -5,12 +5,15 @@ function Landing() {
 	const [isInvalid, setIsInvalid] = useState(false);
 	const handleNameSubmit = (e) => {
 		e.preventDefault();
+		console.log(localStorage.key("chat"))
 		if (name.trim() != "") {
+			if (!localStorage.key("chat")) {
+				localStorage.setItem("chat", 1);
+			}
 			localStorage.setItem("name", name);
-			localStorage.setItem("chat", 1);
 			const userName = localStorage.getItem("name"); // default user name
 			const chatData = [
-				{
+				{   
 					sender: "user",
 					text: "What's Mindstride?",
 				},
@@ -20,11 +23,16 @@ function Landing() {
 				},
 			];
 			const mindstrideDB = indexedDB.open("mindstride");
+			console.log("mindstrideDB",mindstrideDB);
 			mindstrideDB.onsuccess = (event) => {
 				const db = event.target.result; // This is the database object
 
+				console.log("db", db);
+
 				const tx = db.transaction("chats", "readwrite");
 				const store = tx.objectStore("chats");
+
+				console.log("store", store);
 
 				store.add(chatData);
 
