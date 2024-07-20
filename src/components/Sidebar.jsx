@@ -251,10 +251,15 @@ function Sidebar({setMessages, setIndex}) {
 
 					<div className="p-4 border-t border-gray-200">
 						<a
-							className="flex justify-between items-center gap-x-3 py-2 px-3 text-sm text-gray-700 rounded-lg hover:bg-gray-100 cursor-not-allowed"
+							className="flex justify-between items-center gap-x-3 py-2 px-3 text-sm text-red-700 rounded-lg hover:bg-red-200 cursor-pointer"
 							href="#"
+							onClick={() => {
+								localStorage.clear();
+								indexedDB.deleteDatabase("mindstride")
+								window.location.href = "/";
+							}}
 						>
-							Sign in
+							Delete Database
 							<svg
 								className="flex-shrink-0 size-4"
 								xmlns="http://www.w3.org/2000/svg"
