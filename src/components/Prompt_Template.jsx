@@ -1,28 +1,57 @@
 import { useState, useEffect } from "react";
 import Chat_Bubble from "./Chat_Bubble";
 import axios from "axios";
+import PropTypes from "prop-types";
 
-function Prompt_Template() {
-	const userName = localStorage.getItem("name") || "User"; // default user name
-	const [messages, setMessages] = useState([
-		{
-			sender: "user",
-			text: "What's Mindstride?",
-		},
-		{
-			sender: "bot",
-			text: `Hi ${userName}, Mindstride is a RAG-based chat assistant designed to support mental health, personal growth, and self-improvement. Ask me anything you want to know about mental health, personal growth, or self-improvement.`,
-		},
-	]);
+function Prompt_Template({ setMessages, messages, index }) {
+	// const userName = localStorage.getItem("name") || "User"; // default user nameconst [messages, setMessages] = useState([]);
+	// const [messages, setMessages] = useState([]);
 	const [input, setInput] = useState("");
+
+	useEffect(() => {
+		const mindstrideDB = indexedDB.open("mindstride");
+
+		mindstrideDB.onsuccess = (event) => {
+			const db = event.target.result;
+			const tx = db.transaction("chats", "readwrite");
+			const store = tx.objectStore("chats").get(index);
+
+			store.onsuccess = (event) => {
+				const chatData = event.target.result;
+				console.log("chatdata", chatData);
+				if (chatData) {
+					setMessages(chatData);
+				}
+			};
+		};
+
+		mindstrideDB.onerror = (event) => {
+			console.error("Error opening database:", event);
+		};
+	}, []); // Empty dependency array to run only once
 
 	const sendMessage = async () => {
 		if (input.trim() === "") return;
 
 		const userMessage = { sender: "user", text: input };
 		setMessages((prevMessages) => [...prevMessages, userMessage]);
-
 		setInput("");
+
+		const mindstrideDB = indexedDB.open("mindstride");
+		// mindstrideDB.transaction("readwrite", "objectStore", "chats").objectStore("chats").get(1).add(userMessage);
+		mindstrideDB.onsuccess = (event) => {
+			const db = event.target.result;
+			const objectStore = db
+				.transaction(["chats"], "readwrite")
+				.objectStore("chats");
+			const request = objectStore.get(index);
+			request.onsuccess = (event) => {
+				const chatData = event.target.result;
+				chatData.push(userMessage);
+				objectStore.put(chatData);
+			};
+		};
+
 		try {
 			const response = await axios.post(
 				"https://z52r4jnvr2i3e4r4gegsdzh4vq0snwza.lambda-url.us-east-1.on.aws/gemini_inference",
@@ -32,10 +61,23 @@ function Prompt_Template() {
 			console.log(response);
 			const botMessage = { sender: "bot", text: response.data.output };
 			setMessages((prevMessages) => [...prevMessages, botMessage]);
+			const mindstrideDB = indexedDB.open("mindstride");
+			// mindstrideDB.transaction("readwrite", "objectStore", "chats").objectStore("chats").get(1).add(userMessage);
+			mindstrideDB.onsuccess = (event) => {
+				const db = event.target.result;
+				const objectStore = db
+					.transaction(["chats"], "readwrite")
+					.objectStore("chats");
+				const request = objectStore.get(index);
+				request.onsuccess = (event) => {
+					const chatData = event.target.result;
+					chatData.push(botMessage);
+					objectStore.put(chatData);
+				};
+			};
 		} catch (error) {
 			console.error("Error sending message:", error);
 		}
-
 	};
 
 	const handleInputChange = (e) => {
@@ -52,7 +94,6 @@ function Prompt_Template() {
 	useEffect(() => {
 		console.log(messages);
 	}, [messages]);
-
 	return (
 		// <!-- Content -->
 		<div className="relative h-screen w-full lg:ps-64">
@@ -168,5 +209,10 @@ function Prompt_Template() {
 		</div>
 	);
 }
+Prompt_Template.propTypes = {
+	setMessages: PropTypes.func.isRequired,
+	messages: PropTypes.array.isRequired,
+	index: PropTypes.number.isRequired,
+};
 
 export default Prompt_Template;

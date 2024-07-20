@@ -8,6 +8,36 @@ function Landing() {
 		if (name.trim() != "") {
 			localStorage.setItem("name", name);
 			localStorage.setItem("chat", 1);
+			const userName = localStorage.getItem("name"); // default user name
+			const chatData = [
+				{
+					sender: "user",
+					text: "What's Mindstride?",
+				},
+				{
+					sender: "bot",
+					text: `Hi ${userName}, Mindstride is a RAG-based chat assistant designed to support mental health, personal growth, and self-improvement. Ask me anything you want to know about mental health, personal growth, or self-improvement.`,
+				},
+			];
+			const mindstrideDB = indexedDB.open("mindstride");
+			mindstrideDB.onsuccess = (event) => {
+				const db = event.target.result; // This is the database object
+
+				const tx = db.transaction("chats", "readwrite");
+				const store = tx.objectStore("chats");
+
+				store.add(chatData);
+
+				tx.oncomplete = () => {
+					console.log("Transaction completed");
+				};
+
+				// ... (rest of your code after successful connection)
+			};
+
+			mindstrideDB.onerror = (event) => {
+				console.error("Error opening database:", event);
+			};
 			window.location.href = "/chat";
 		} else {
 			setIsInvalid(true);

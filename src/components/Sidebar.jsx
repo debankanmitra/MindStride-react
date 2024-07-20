@@ -1,7 +1,75 @@
-function Sidebar() {
-	const handleNewChat = () => {
-		window.location.reload();
+import { useState } from "react";
+import PropTypes from 'prop-types';
+
+
+function Sidebar({setMessages, setIndex}) {
+	const [count, setCount] = useState(localStorage.getItem("chat"));
+	const handleChat = (clickedIndex) => {
+		setIndex(clickedIndex);
+		// Use the clickedIndex to perform actions based on the clicked item
+		const mindstrideDB = indexedDB.open("mindstride");
+
+		mindstrideDB.onsuccess = (event) => {
+			const db = event.target.result;
+			const tx = db.transaction("chats", "readwrite");
+			const store = tx.objectStore("chats").get(clickedIndex);
+
+			store.onsuccess = (event) => {
+				const chatData = event.target.result;
+				console.log("chatdata", chatData);
+				if (chatData) {
+					setMessages(chatData);
+				}
+			};
+		};
 	}
+
+	let chatList = [];
+
+	for (let index = 1; index <= count; index++) {
+		chatList.push(
+			<li key={index} onClick={() => handleChat(index)}>
+				<button className="flex items-center w-full gap-x-3 px-3 pb-1 text-md text-gray-700 rounded-lg hover:bg-gray-200 active:bg-gray-200 focus:bg-gray-200">
+					<span className="flex-shrink-0 size-4">💭</span>
+					<span className="text-md mt-1">Chat {index}</span>
+				</button>
+			</li>
+		);
+	}
+
+	
+	const handleNewChat = () => {
+		setCount(parseInt(count) + 1);
+		localStorage.setItem("chat", parseInt(count) + 1);
+		const mindstrideDB = indexedDB.open("mindstride");
+		const userName = localStorage.getItem("name"); // default user name
+		const chatData = [
+			{
+				sender: "user",
+				text: "What's Mindstride?",
+			},
+			{
+				sender: "bot",
+				text: `Hi ${userName}, Mindstride is a RAG-based chat assistant designed to support mental health, personal growth, and self-improvement. Ask me anything you want to know about mental health, personal growth, or self-improvement.`,
+			},
+		];
+		mindstrideDB.onsuccess = (event) => {
+			const db = event.target.result; // This is the database object
+
+			const tx = db.transaction("chats", "readwrite");
+			const store = tx.objectStore("chats");
+
+			store.add(chatData);
+
+			tx.oncomplete = () => {
+				console.log("Transaction completed");
+				db.close();
+			};
+
+			// ... (rest of your code after successful connection)
+		};
+		// window.location.reload();
+	};
 	return (
 		// <!-- Sidebar -->
 		<div
@@ -60,7 +128,10 @@ function Sidebar() {
 					{/* <!-- List --> */}
 					<ul className="space-y-1.5 p-4">
 						<li>
-							<button className="flex items-center gap-x-3 py-2 px-3 text-sm text-gray-700 rounded-lg hover:bg-gray-100" onClick={handleNewChat}>
+							<button
+								className="flex items-center font-semibold gap-x-3 py-2 px-3 text-sm text-gray-700 rounded-lg hover:bg-gray-200"
+								onClick={handleNewChat}
+							>
 								<svg
 									className="flex-shrink-0 size-4"
 									xmlns="http://www.w3.org/2000/svg"
@@ -79,7 +150,11 @@ function Sidebar() {
 								New chat
 							</button>
 						</li>
+						{chatList}
 					</ul>
+					{/* <ul>
+						{chatList}
+					</ul> */}
 					{/* <!-- End List --> */}
 				</div>
 
@@ -205,5 +280,10 @@ function Sidebar() {
 		// <!-- End Sidebar -->
 	);
 }
+
+Sidebar.propTypes = {
+	setMessages: PropTypes.func.isRequired,
+	setIndex: PropTypes.func.isRequired,
+  };
 
 export default Sidebar;
