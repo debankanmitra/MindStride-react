@@ -54,7 +54,7 @@ function Prompt_Template({ setMessages, messages, index }) {
 
 		try {
 			const response = await axios.post(
-				"https://z52r4jnvr2i3e4r4gegsdzh4vq0snwza.lambda-url.us-east-1.on.aws/gemini_inference",
+				"https://mindstride-1.onrender.com/gemini_inference",
 				{ user: input }
 			);
 
